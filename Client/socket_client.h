@@ -15,8 +15,9 @@
 #define SOCKET_CLIENT_H
 
 int     create_conn(const char *servip, int port);
-int     send_msg(int sockfd, const char *message);
+int     send_msg(int sockfd, const char *data, size_t data_size);
 int     receive_msg(int sockfd, char *buf, size_t buf_size);
 void    close_conn(int sockfd);
+void    print_usage(char *progname);
 
 #endif // SOCKET_CLIENT_H

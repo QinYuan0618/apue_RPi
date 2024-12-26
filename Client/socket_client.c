@@ -22,7 +22,7 @@
 
 
 /**
- * @brief 创建连接并返回套接字描述符
+ * @brief 与服务器建立连接。命令行传参
  * @param servip 服务器的IP地址
  * @param port  服务器端口
  * @return int  返回套接字描述符，如果失败返回负值
@@ -30,7 +30,7 @@
 int create_conn(const char *servip, int port)
 {
     int                             sockfd = -1;
-    struct sockaddr_in               servaddr; // IPv4
+    struct sockaddr_in              servaddr; // IPv4
 
     // 1.创建socket
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -65,14 +65,14 @@ int create_conn(const char *servip, int port)
  * @param message 发送的消息内容
  * @return int 返回0表示成功，负值表示失败
  */
-int send_msg(int sockfd, const char *message)
+int send_msg(int sockfd, const char *data, size_t data_size)
 {
-    ssize_t rv = write(sockfd, message, strlen(message)); // ssize_t是有符号的证书类型，大小与平台相关
+    ssize_t rv = write(sockfd, data, data_size); // ssize_t是有符号的整数类型，大小与平台相关
     if (rv < 0)
     {
         printf("Write to server failure: %s\n", strerror(errno));
     }
-    return 0;
+    return rv;
 }
 
 
@@ -102,6 +102,7 @@ int receive_msg(int sockfd, char *buf, size_t buf_size)
     }
     return rv;
 }
+
 
 /**
  * @brief 关闭连接

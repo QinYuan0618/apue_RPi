@@ -5,12 +5,12 @@
  *       Filename:  ds18b20.h
  *    Description:  This file 
  *
- *        Version:  1.0.0(20/12/24)
- *         Author:  LingYun <iot25@lingyun>
- *      ChangeLog:  1, Release initial version on "20/12/24 15:31:52"
+ *        Version:  1.0.0(24/12/23)
+ *         Author:  Qinyuan <iot25@lingyun>
+ *      ChangeLog:  1, Release initial version on "24/12/23 15:31:52"
  *                 
  ********************************************************************************/
-// ds18b20.h
+
 #ifndef DS18B20_H // 如果没有定义 DS18B20_H
 #define DS18B30_H // 定义 DS18B20_H
 
@@ -25,6 +25,15 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-int get_temperature(float *temp);
+#define MAX_SN_LEN 32
+
+typedef struct
+{
+    time_t  timestap;    // 当前时间
+    char    serial_no[MAX_SN_LEN]; // 序列号
+    float   temperature; //当前温度
+}data_t;
+
+data_t get_temperature();
 
 #endif // DS18B20_H 
