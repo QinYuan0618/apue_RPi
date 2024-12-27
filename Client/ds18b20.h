@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <dirent.h>
+#include <dirent.h>                     
 #include <errno.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -29,7 +29,7 @@
 
 typedef struct
 {
-    time_t  timestap;    // 当前时间
+    time_t  timestamp;    // 当前时间
     char    serial_no[MAX_SN_LEN]; // 序列号
     float   temperature; //当前温度
 }data_t;

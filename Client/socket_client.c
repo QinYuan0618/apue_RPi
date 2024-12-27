@@ -60,6 +60,35 @@ int create_conn(const char *servip, int port)
 
 
 /**
+ * @brief 断线重连
+ * @param sockfd 套接字描述符
+ * @param servip 服务器ip地址
+ * @param port 服务器端口号
+ * @return 成功返回正值，失败返回负值
+ */
+int re_conn(int sockfd, char *servip, int port)
+{
+    int retries = 5; // 最大重试次数
+    int delay = 1;   // 初始延迟时间，单位秒
+
+    while (sockfd < 0 && retries > 0)
+    {
+        /* 尝试重新连接 */
+        sockfd = create_conn(servip, port);
+        if (sockfd < 0)
+        {
+            printf("Connection failed, retrying in %d seconds...", delay);
+            sleep(delay);
+            retries--;
+            delay *= 2; // 逐步增加延时时间
+        }
+    }
+
+    return sockfd;
+}
+
+
+/**
  * @brief 向服务器发送消息
  * @param sockfd 套接字描述符
  * @param message 发送的消息内容

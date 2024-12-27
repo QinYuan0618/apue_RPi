@@ -37,7 +37,7 @@ data_t get_temperature()
   time(&rawtime);
   timeinfo = localtime(&rawtime);
   strftime(time_buffer, sizeof(time_buffer), "%Y-%m-%d %H:%M:%S", timeinfo); //格式化时间
-  data.timestap = rawtime; //?为什么是存储rawtime而不是timebuffer。
+  data.timestamp = rawtime; // 存储timestamp 更利于存储和传输
 
   /* 1.打开w1设备目录, dirp指向这个目录 */
   dirp = opendir(w1_path);
